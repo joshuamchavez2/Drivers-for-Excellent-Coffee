@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from sklearn.model_selection import train_test_split
 
 def clean(df):
     '''
@@ -53,6 +53,9 @@ def clean(df):
     df['Harvest.Year'] = np.where(df['Harvest.Year'].str.contains('/'), df.grading_year, df['Harvest.Year'])
     df['Harvest.Year'] = np.where(df['Harvest.Year'].str.contains('-'), df.grading_year, df['Harvest.Year'])
     
+    # Change Harvest.Year datatype
+    df['Harvest.Year'] = df['Harvest.Year'].astype(int)
+    
     # Data Input Errors, used google to compare regions altitude to confirm correct altitude
     df.at[543,'altitude_mean_meters']=1100
     df.at[896, 'altitude_mean_meters']=1901.64
@@ -77,3 +80,74 @@ def clean(df):
     df['excellent_rating'] = np.where(df.total_cup_points > 85, 1, 0)
     
     return df
+
+def encode(df):
+    '''
+    Encode takes in a pandas dataframe
+    Creates dummy columns for variety, processing_method, & color
+    Adds the new columns to pandas dataframe
+    Drops non numeric columns
+    Returns a pandas dataframe
+    '''
+    
+    # Making Dummy Columns for variety, processing_method, & color
+    dummy_columns = ['variety', 'processing_method', 'color']
+    df_dummy = pd.get_dummies(df[dummy_columns])
+    
+    # Droppign Blue-Green from color since there are only two colors, its either green or its not
+    df_dummy = df_dummy.drop(columns=['color_Blue-Green'])
+    
+    # Combine our dummy columns with our data frame
+    df = pd.concat([df, df_dummy], axis = 1)
+    
+    # Drop any non numeric columns
+    cols =  ['country', 'region', 'grading_date', 'variety', 'processing_method', 'color', 'grading_month', 'grading_year', 'grading_day']
+    df = df.drop(columns=cols)
+    
+    return df
+
+def split_data(df):
+    '''
+    Takes in a pandas Data Frame
+    uses train_test_split from sklearn library to split the data into three data frames
+    train, validate, & test
+    Stratified on my target excellent_rating
+    '''
+    # Creating test
+    train, test = train_test_split(df, test_size = 0.2, random_state = 5868, stratify = df.excellent_rating)
+    
+    # Creating train and validate
+    train, validate = train_test_split(train, test_size=.3, random_state = 5868, stratify=train.excellent_rating)
+    
+    return train, validate, test
+
+def prepare(df):
+    '''
+    Takes in a pandas data frame
+    Cleans, encodes, & splits
+    Returns train, validate, & test
+    '''
+    # Clean the data
+    df = clean(df)
+
+    # Encode the data
+    df = encode(df)
+
+    # Split the data
+    train, validate, test = split_data(df)
+
+    return train, validate, test
+
+def prepare_explore(df):
+    '''
+    Takes in a pandas data frame
+    Cleans & splits (No encoding)
+    Returns train, validate, & test
+    '''
+    # Clean the data
+    df = clean(df)
+
+    # Splits the data into train, validate, & test.
+    train, validate, test = split_data(df)
+
+    return train, validate, test
