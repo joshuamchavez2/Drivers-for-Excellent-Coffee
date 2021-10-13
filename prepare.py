@@ -108,8 +108,8 @@ def encode(df):
 
 def remove_outliers(df):
     
-    # Weight of this bag seems to be an error 
-    df = df.drop(158)
+    # Dropped any bag weight more than 80 
+    df = df[df.bag_weight <= 80]
     
     # Removing processing_methods 'Other' and 'Pulped natural / honey' because the samples were too small
     df = df[(df.processing_method != 'Other') & (df.processing_method != 'Pulped natural / honey')]
