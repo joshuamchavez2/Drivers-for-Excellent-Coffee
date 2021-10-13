@@ -156,11 +156,13 @@ def prepare(df):
     # Clean the data
     df = clean(df)
 
+    # Remove outliers
+    df = remove_outliers(df)
+    
     # Encode the data
     df = encode(df)
 
-    # Remove outliers
-    df = remove_outliers(df)
+    
 
     # Split the data
     train, validate, test = split_data(df)
