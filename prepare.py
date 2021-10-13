@@ -77,7 +77,7 @@ def clean(df):
                    'Quakers':'quakers', 'Color':'color', 'Category.Two.Defects': 'category_two_defects'})
     
     # Created Target Feature, Looking for total_cup_points greater than 85
-    df['excellent_rating'] = np.where(df.total_cup_points > 85, 1, 0)
+    df['excellent_rating'] = np.where(df.total_cup_points >= 84, 1, 0)
     
     return df
 
@@ -103,6 +103,32 @@ def encode(df):
     # Drop any non numeric columns
     cols =  ['country', 'region', 'grading_date', 'variety', 'processing_method', 'color', 'grading_month', 'grading_year', 'grading_day']
     df = df.drop(columns=cols)
+    
+    return df
+
+def remove_outliers(df):
+    df = df[(df.processing_method != 'Other') & (df.processing_method != 'Pulped natural / honey')]
+    
+    df = df[df.variety != 'Catimor']
+    df = df[df.variety != 'SL14']
+    df = df[df.variety != 'SL28']
+    df = df[df.variety != 'Pacas']
+    df = df[df.variety != 'Gesha']
+    df = df[df.variety != 'Pacamara']
+    df = df[df.variety != 'SL34']
+    df = df[df.variety != 'Java']
+    df = df[df.variety != 'Ethiopian Yirgacheffe']
+    df = df[df.variety != 'Blue Mountain']
+    df = df[df.variety != 'Ruiru 11']
+    df = df[df.variety != 'Ethiopian Heirlooms']
+    df = df[df.variety != 'Sumatra Lintong']
+    df = df[df.variety != 'Sumatra']
+    df = df[df.variety != 'Pache Comun']
+    df = df[df.variety != 'Mandheling']
+    df = df[df.variety != 'Marigojipe']
+    df = df[df.variety != 'Arusha']
+    df = df[df.variety != 'Moka Peaberry']
+    df = df[df.variety != 'Peaberry']
     
     return df
 
@@ -133,6 +159,9 @@ def prepare(df):
     # Encode the data
     df = encode(df)
 
+    # Remove outliers
+    df = remove_outliers(df)
+
     # Split the data
     train, validate, test = split_data(df)
 
@@ -147,6 +176,9 @@ def prepare_explore(df):
     # Clean the data
     df = clean(df)
 
+    # Remove outliers
+    df = remove_outliers(df)
+    
     # Splits the data into train, validate, & test.
     train, validate, test = split_data(df)
 
