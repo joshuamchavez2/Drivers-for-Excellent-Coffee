@@ -107,8 +107,14 @@ def encode(df):
     return df
 
 def remove_outliers(df):
+    
+    # Weight of this bag seems to be an error 
+    df = df.drop(158)
+    
+    # Removing processing_methods 'Other' and 'Pulped natural / honey' because the samples were too small
     df = df[(df.processing_method != 'Other') & (df.processing_method != 'Pulped natural / honey')]
     
+    # Removing variety of the following because the samples were too small
     df = df[df.variety != 'Catimor']
     df = df[df.variety != 'SL14']
     df = df[df.variety != 'SL28']
@@ -158,7 +164,7 @@ def prepare(df):
 
     # Remove outliers
     df = remove_outliers(df)
-    
+
     # Encode the data
     df = encode(df)
 
