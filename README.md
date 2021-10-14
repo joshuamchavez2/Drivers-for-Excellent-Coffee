@@ -88,13 +88,13 @@
 
 > - The altitude_mean_meters and the processing_method are the two most important drivers for coffee rating of 84 or higher
 
-> - **Hypothesis 1 -**
+#### Hypothesis 1
 > - alpha = .05
 > - $H_0$: There is no difference in altitude_mean_meters in 84 or higher rated coffee from less than 84 rated coffee.
 > - $H_a$: There is a difference in altitude_mean_meters in 84 or higher rated coffee from less than 84 rated coffee.
 > - Outcome: I rejected null hypothesis; There IS a difference in altitude_mean_meters in 84 or higher rated coffee from less than 84 rated coffee.
 
-> - **Hypothesis 2 -** 
+#### Hypothesis 2
 > - alpha = .05
 > - $H_0$: The average bag_weight of 84 or higher rated coffee is not different than the average of the entire population.
 > - $H_a$: The average bag_weight of 84 or higher rated coffee is different than the average of the entire population.
