@@ -109,6 +109,11 @@ def encode(df):
     return df
 
 def remove_outliers(df):
+    '''
+    Dropped any bag weight more than 80 
+    Removing processing_methods 'Other' and 'Pulped natural / honey' because the samples were too small
+    Removed 20 different variety because the samples were too small
+    '''
     
     # Dropped any bag weight more than 80 
     df = df[df.bag_weight <= 80]
@@ -141,7 +146,12 @@ def remove_outliers(df):
     return df
 
 def scale(train, validate, test):
-
+    '''
+    Takes in three pandas Data Frames
+    Scales each data frame with a MinMaxScaler
+    Drops the unscaled columns
+    Returns train, validate, test scaled
+    '''
     columns_to_scale = ['number_of_bags','harvest_year', 'aroma', 'flavor', 'aftertaste', 'acidity', 'body', 'balance', 'uniformity', 'clean_cup', 'sweetness', 'cupper_points', 'moisture', 'category_one_defects', 'quakers', 'category_two_defects', 'altitude_mean_meters', 'bag_weight', 'variety_Bourbon', 'variety_Catuai', 'variety_Caturra', 'variety_Mundo Novo', 'variety_Other', 'variety_Typica', 'variety_Yellow Bourbon', 'processing_method_Natural / Dry', 'processing_method_Semi-washed / Semi-pulped', 'processing_method_Washed / Wet', 'color_Green', 'grading_month', 'grading_year']
     scaler = MinMaxScaler()
     train, validate, test = add_scaled_columns(train, validate, test, scaler, columns_to_scale)
