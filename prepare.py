@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from functions import add_scaled_columns
 
 def clean(df):
     '''
@@ -101,7 +103,7 @@ def encode(df):
     df = pd.concat([df, df_dummy], axis = 1)
     
     # Drop any non numeric columns
-    cols =  ['country', 'region', 'grading_date', 'variety', 'processing_method', 'color', 'grading_month', 'grading_year', 'grading_day']
+    cols =  ['country', 'region', 'grading_date', 'variety', 'processing_method', 'color', 'grading_day']
     df = df.drop(columns=cols)
     
     return df
@@ -138,6 +140,20 @@ def remove_outliers(df):
     
     return df
 
+def scale(train, validate, test):
+
+    columns_to_scale = ['number_of_bags','harvest_year', 'aroma', 'flavor', 'aftertaste', 'acidity', 'body', 'balance', 'uniformity', 'clean_cup', 'sweetness', 'cupper_points', 'moisture', 'category_one_defects', 'quakers', 'category_two_defects', 'altitude_mean_meters', 'bag_weight', 'variety_Bourbon', 'variety_Catuai', 'variety_Caturra', 'variety_Mundo Novo', 'variety_Other', 'variety_Typica', 'variety_Yellow Bourbon', 'processing_method_Natural / Dry', 'processing_method_Semi-washed / Semi-pulped', 'processing_method_Washed / Wet', 'color_Green', 'grading_month', 'grading_year']
+    scaler = MinMaxScaler()
+    train, validate, test = add_scaled_columns(train, validate, test, scaler, columns_to_scale)
+
+    #Dropping nonscaled columns
+    columns_to_scale.append('total_cup_points')
+    train = train.drop(columns=columns_to_scale)
+    validate = validate.drop(columns=columns_to_scale)
+    test = test.drop(columns=columns_to_scale)
+
+    return train, validate, test
+
 def split_data(df):
     '''
     Takes in a pandas Data Frame
@@ -168,12 +184,14 @@ def prepare(df):
     # Encode the data
     df = encode(df)
 
-    
-
     # Split the data
     train, validate, test = split_data(df)
 
+    # Scale
+    train, validate, test = scale(train, validate, test)
     return train, validate, test
+
+
 
 def prepare_explore(df):
     '''
