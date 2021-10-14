@@ -23,7 +23,7 @@
 > - All necessary modules to make my project reproducible
 
 #### Project Context
-> - The original data is from coffee quality database[cqi](https://www.coffeeinstitute.org) but I downloaded the csv file from the kaggle link [here](https://www.kaggle.com/volpatto/coffee-quality-database-from-cqi/download)
+> - The original data is from coffee quality institute database [cqi](https://www.coffeeinstitute.org) but I downloaded the csv file from the kaggle link [here](https://www.kaggle.com/volpatto/coffee-quality-database-from-cqi/)
 
 
 #### Data Dictionary
@@ -84,7 +84,7 @@
 | excellent_rating      | Total.Cup.Points >= 84      | Integar Values: 1 for True; 0 for False     |
 | total_bag_weight      | Number.of.Bags * Bag.Weight | Float measured in kilograms                 |
 
-#### Initial Hypotheses
+#### Original Hypotheses
 
 > - The altitude_mean_meters and the processing_method are the two most important drivers for coffee rating of 84 or higher
 

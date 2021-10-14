@@ -199,9 +199,8 @@ def prepare(df):
 
     # Scale
     train, validate, test = scale(train, validate, test)
+    
     return train, validate, test
-
-
 
 def prepare_explore(df):
     '''
