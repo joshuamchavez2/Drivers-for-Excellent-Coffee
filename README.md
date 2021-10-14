@@ -105,12 +105,14 @@
 <hr style="border-top: 10px groove blueviolet; margin-top: 1px; margin-bottom: 1px"></hr>
 
 #### Conclustion
-> - My random forest classifier model accuracy was 85% beating my baseline accuracy.
-> - Testing my model, on unseen data, confirmed that only half of my original hypothesis was correct. Alttitude was a driver but processing_method was not.
+
+> - My random forest classifier model accuracy for unseen data (test) was 85% beating my baseline accuracy.
+> - My model confirmed that only half of my original hypothesis was correct. Alttitude was a driver but processing_method was not.
 > - My model identified the most important features as: altitude_mean_meters, grading_month, number_of_bags, harvest_year, & bag_weight.
 > - If I had more time I would have liked to: web scraped for newer coffee data, engineer more features, find out the average temperature for each region, iterate through hyperparameters to boost accuracy, & have more domain knowledge.
 
 #### Recommendations
+
 > - The data suggests for anyone trying to pursue coffee grades of 84 or higher to; use a farm located in a high altitude area, have your coffee ready for grading by December, have a large harvest, & use heavier bags of coffee.
 > - These are interesting suggestions as I don't have enough domain knowledge to know why having a large havest & heavier bags would make a difference in grading score. I would speculate that the larger the harvest the more it would overshadow any bad coffee bean plants but im not 100% certain.  Whereas, the altitude and grading_month recommendations make more sense.  
 
@@ -179,5 +181,5 @@ ___
 You will need to download your own csv file along with all the necessary files listed below to run my final project notebook. 
 - [x] Read this README.md
 - [ ] Download the aquire.py, prepare.py, functions.py, wrangle.py, and final.ipynb files into your working directory
-- [ ] download csv from link https://www.kaggle.com/volpatto/coffee-quality-database-from-cqi/download the link will download a folder named archive, grab the csv file named arabica_data_cleaned.csv from within the archive folder and place it in your cloned repository and/or working directory. 
+- [ ] download csv from [link](https://www.kaggle.com/volpatto/coffee-quality-database-from-cqi/download), the link will download a folder named archive, grab the csv file named arabica_data_cleaned.csv from within the archive folder and place it in your cloned repository and/or working directory. 
 - [ ] Run the final_report.ipynb notebook
