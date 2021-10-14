@@ -181,5 +181,5 @@ ___
 You will need to download your own csv file along with all the necessary files listed below to run my final project notebook. 
 - [x] Read this README.md
 - [ ] Download the aquire.py, prepare.py, functions.py, wrangle.py, and final.ipynb files into your working directory
-- [ ] download csv from [link](https://www.kaggle.com/volpatto/coffee-quality-database-from-cqi/download), the link will download a folder named archive, grab the csv file named arabica_data_cleaned.csv from within the archive folder and place it in your cloned repository and/or working directory. 
+- [ ] download csv from this [link](https://www.kaggle.com/volpatto/coffee-quality-database-from-cqi/download). The link will download a folder named archive, grab the csv file named arabica_data_cleaned.csv from within the archive folder and place it in your cloned repository and/or working directory. 
 - [ ] Run the final_report.ipynb notebook
