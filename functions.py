@@ -28,6 +28,10 @@ import sklearn.preprocessing
 ############################## Cleaning ################################
 
 def add_scaled_columns(train, validate, test, scaler, columns_to_scale):
+    '''
+    This function takes in train, validate, test, scaler, and columns to scale
+    It returns train validate and test with orginal columns plus scaled columns
+    '''
     
     # new column names
     new_column_names = [c + '_scaled' for c in columns_to_scale]
@@ -62,7 +66,7 @@ def get_data_dictionary(df):
     Fill in your values for d_list (description)
     concats your description with your feature, nonnull, and Dtype values
     '''
-    
+    # Add the discriptions of your features here and save to d_list
     d_list = ['index column',
         'Species of coffee bean (arabica or robusta)',
         'Owner of the farm',
@@ -108,20 +112,13 @@ def get_data_dictionary(df):
         'Altitude high meters',
         'Altitude mean meters',]
 
+    # Creating a Data Frame with the basic given information
     data_dictionary = pd.DataFrame([{'Feature': col,
          'Datatype': f'{df[col].count()} non-null: {df[col].dtype}'} for col in df.columns])
     
+    # Creating a database with the describe information
     describe = pd.Series(d_list)
+
+    # Concatting them together and returning those values
     df = pd.concat([data_dictionary, describe.rename("Description")], axis = 1)
     return df.set_index("Feature")
-
-def get_target(df):  
-    '''
-    Takes in a data frame
-    find out what index your target is set it to that number 
-    '''  
-    target_index = 8
-    df = get_data_dictionary(df)
-    df= df.reset_index()
-    df = df.rename(index = {target_index: 'Target'})
-    return df.iloc[61]
